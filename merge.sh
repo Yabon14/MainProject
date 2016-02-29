@@ -9,11 +9,11 @@ echo Automatically merging commit $LAST_COMMIT from $CURRENT_BRANCH rippling to 
 
 git checkout develop-cityA
 git merge develop
-git commit 'merge develop'
+git commit -m 'merge develop'
 
 git checkout develop-cityB
 git merge develop
-git commit 'merge develop'
+git commit -m 'merge develop'
 
 git checkout develop
 
