@@ -15,6 +15,7 @@ git checkout develop-cityB
 git merge develop
 git commit 'merge develop'
 
+git checkout develop
 
 # case $CURRENT_BRANCH in
 # 2.1)
