@@ -24,6 +24,7 @@ if [[ $REMOTE == *"/develop"* ]]
 then
   echo "It's there: $REMOTE";
   git checkout $REMOTE
+  git merge develop
   git commit -m 'merge develop'
 fi
 done
