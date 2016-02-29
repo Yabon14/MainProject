@@ -26,6 +26,7 @@ then
   git checkout $REMOTE
   git merge develop
   git commit -m 'merge develop'
+  git config --global push.default current
 fi
 done
 
