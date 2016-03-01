@@ -16,15 +16,18 @@ do
     git checkout $REMOTE
     MERGE_RESULT=$(git merge develop)
     echo "******************  MERGE_RESULT ********************     $MERGE_RESULT"
-
-    git commit -m 'merge develop'
-    for COMMIT in `git log $REMOTE --oneline`
-    do
-    # echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
+    if [[ $MERGE_RESULT != *"Updating"* ]] then
+      echo " -- Conflict with branch $REMOTE, please merge manually --"
+      for COMMIT in `git log $REMOTE --oneline`
+      do
+      # echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
+        git commit -m 'merge develop'
+        git checkout -f $COMMIT
+        break
+      done
+    else
       git commit -m 'merge develop'
-      git checkout -f $COMMIT
-      break
-    done
+    fi
   fi
 done
 
