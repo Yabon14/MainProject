@@ -15,10 +15,11 @@ do
     # echo "It's there: $REMOTE";
     git checkout $REMOTE
     MERGE_RESULT=$(git merge develop)
-    echo "******************  MERGE_RESULT ********************     $MERGE_RESULT"
     if [[ $MERGE_RESULT != *"Updating"* ]] 
     then
-      echo " -- Conflict with branch $REMOTE, please merge manually --"
+      echo "***********************************************************"
+      echo "*** Conflict with branch $REMOTE, please merge manually ***"
+      echo "***********************************************************"
       for COMMIT in `git log $REMOTE --oneline`
       do
       # echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
