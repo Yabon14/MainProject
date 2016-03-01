@@ -16,7 +16,8 @@ do
     git checkout $REMOTE
     MERGE_RESULT=$(git merge develop)
     echo "******************  MERGE_RESULT ********************     $MERGE_RESULT"
-    if [[ $MERGE_RESULT != *"Updating"* ]] then
+    if [[ $MERGE_RESULT != *"Updating"* ]] 
+    then
       echo " -- Conflict with branch $REMOTE, please merge manually --"
       for COMMIT in `git log $REMOTE --oneline`
       do
