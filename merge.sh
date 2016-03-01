@@ -5,20 +5,22 @@
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 LAST_COMMIT=$(git rev-list -1 HEAD)
 
-echo Automatically merging commit $LAST_COMMIT from $CURRENT_BRANCH rippling to master
+# echo Automatically merging commit $LAST_COMMIT from $CURRENT_BRANCH rippling to master
 
 
 for REMOTE in `git branch --list`
 do 
   if [[ $REMOTE == *"/develop"* ]]
   then
-    echo "It's there: $REMOTE";
+    # echo "It's there: $REMOTE";
     git checkout $REMOTE
-    git merge develop
+    MERGE_RESULT=$(git merge develop)
+    echo "******************  MERGE_RESULT ********************     $MERGE_RESULT"
+
     git commit -m 'merge develop'
     for COMMIT in `git log $REMOTE --oneline`
     do
-    echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
+    # echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
       git commit -m 'merge develop'
       git checkout -f $COMMIT
       break
