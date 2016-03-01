@@ -7,28 +7,25 @@ LAST_COMMIT=$(git rev-list -1 HEAD)
 
 echo Automatically merging commit $LAST_COMMIT from $CURRENT_BRANCH rippling to master
 
-# git checkout develop-cityA
-# git merge develop
-# git commit -m 'merge develop'
-
-# git checkout develop-cityB
-# git merge develop
-# git commit -m 'merge develop'
-
-# git checkout develop
-
 
 for REMOTE in `git branch --list`
 do 
-if [[ $REMOTE == *"/develop"* ]]
-then
-  echo "It's there: $REMOTE";
-  git checkout $REMOTE
-  git merge develop
-  git commit -m 'merge develop'
-  git config --global push.default current
-fi
+  if [[ $REMOTE == *"/develop"* ]]
+  then
+    echo "It's there: $REMOTE";
+    git checkout $REMOTE
+    git merge develop
+    git commit -m 'merge develop'
+    for COMMIT in `git log $REMOTE --oneline`
+    do
+    echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
+      git commit -m 'merge develop'
+      git checkout -f $COMMIT
+      break
+    done
+  fi
 done
 
 
 git checkout develop
+
