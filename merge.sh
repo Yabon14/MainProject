@@ -1,11 +1,9 @@
 #!/bin/sh
-# Automatically merge the last commit through the following branches:
-# 2.1 -} 2.2 -} 2.3 -} master
+# Automatically merge the develop branch into all target/<city>/develop
+# Automatically cancel the merge if there is conflicts
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 LAST_COMMIT=$(git rev-list -1 HEAD)
-
-# echo Automatically merging commit $LAST_COMMIT from $CURRENT_BRANCH rippling to master
 
 
 for REMOTE in `git branch --list`
@@ -17,9 +15,9 @@ do
     MERGE_RESULT=$(git merge develop)
     if [[ $MERGE_RESULT != *"Updating"* ]] 
     then
-      echo "***********************************************************"
+      echo "*****************************************************************"
       echo "*** Conflict with branch $REMOTE, please merge manually ***"
-      echo "***********************************************************"
+      echo "*****************************************************************"
       for COMMIT in `git log $REMOTE --oneline`
       do
       # echo "Name of commit in branch $REMOTE:  ------------  $COMMIT"
