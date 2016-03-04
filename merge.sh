@@ -24,7 +24,7 @@ do
 
     echo "Merge result is $MERGE_RESULT"
     
-    if [[ $MERGE_RESULT != *"Updating"* ]] 
+    if [[ $MERGE_RESULT == *"Auto-merging"* ]]
     then
       echo "*****************************************************************"
       echo "*** Conflict with branch $REMOTE, please merge manually ***"
