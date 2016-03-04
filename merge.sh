@@ -12,7 +12,18 @@ do
   then
     # echo "It's there: $REMOTE";
     git checkout $REMOTE
-    MERGE_RESULT=$(git merge develop)
+
+    MERGE_RESULT="result"
+
+    if [[ $REMOTE == *"cityB/develop"* ]] 
+    then
+      MERGE_RESULT=$(git merge -s ours develop)
+    else
+      MERGE_RESULT=$(git merge develop)
+    fi
+
+    echo "Merge result is $MERGE_RESULT"
+    
     if [[ $MERGE_RESULT != *"Updating"* ]] 
     then
       echo "*****************************************************************"
